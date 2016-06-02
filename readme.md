@@ -12,11 +12,11 @@ There are two important details to keep in mind. Tomorrow morning, we'll be demo
 ```ruby
 #create
 post "/pizzas" do
-    params = {name: "Red Anchovy Delight", sauce: 'red', cheese:true, mushrooms:true, extra_toppings: "anchoves"}
+    params = {name: "Red Anchovy Delight", sauce: 'red', cheese:true, mushrooms:true, extra_toppings: "anchovies"}
     #...
 ```
 
-* Definitely use `tux` to test out if your code works *before* placing inside your controller!!
+* Definitely use `tux` to test out if your code works *before* placing it inside your controller!!
 * Feel free to test out your routes with the [`curl`](http://conqueringthecommandline.com/book/curl#cid25) command (use `localhost:9292` as the url you'll hit).
     * Tip: [how to send a POST request with curl, using parameters!](http://conqueringthecommandline.com/book/curl#uid105)
 
