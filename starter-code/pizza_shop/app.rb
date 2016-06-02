@@ -13,11 +13,12 @@ class PizzaShop < Sinatra::Base
     end
 
     # create new pizza
-    post "/pizzas" do
-        params = {name: "Mrs Robinson", sauce: "red", cheese: true, mushrooms: true, extra_toppings: "virgin olive oil"}
-        @pizza = Pizza.new(params);
-        @pizza.save
-        "New pizza saved"
+    post "/pizzas" do 
+        p params
+        # params = {name: "Mrs Robinson", sauce: "red", cheese: true, mushrooms: true, extra_toppings: "virgin olive oil"}
+        @pizza = Pizza.create(params[:pizza])
+        # "New pizza saved"
+        redirect "/pizzas"
     end
 
 end
