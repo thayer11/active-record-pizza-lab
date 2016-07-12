@@ -10,7 +10,7 @@ class PizzaShop < Sinatra::Base
   # POST "/pizzas" - Create a new pizza, add it to our list
   post "/pizzas" do
     #these will eventually be real params passed from the client
-    params = {name: "Red Anchove Delight", sauce: 'red', cheese:true, mushrooms:true, extra_toppings: "anchoves"}
+    params = {name: "Red Anchovy Delight", sauce: 'red', cheese:true, mushrooms:true, extra_toppings: "anchovies"}
     @pizza = Pizza.new(params)
     @pizza.save
   end
@@ -24,7 +24,7 @@ class PizzaShop < Sinatra::Base
   # UPDATE - like CREATE, this does the actual updating
   # PUT "/pizzas/3" - Updates a specific pizza
   put "/pizzas/:id" do
-    params = {name: "White Anchove Delight", sauce: 'white'}
+    params = {name: "White Anchovy Delight", sauce: 'white'}
     @pizza = Pizza.find(params[:id])
     @pizza.update_attributes(params)
   end
@@ -32,7 +32,7 @@ class PizzaShop < Sinatra::Base
   # UPDATE - believe it not, PUT & PATCH are often the same code, so many developers skip PATCH and just have PUT
   # PATCH "/pizzas/3" - Partially updates a specific pizza
   patch "/pizzas/:id" do
-    params = {name: "White Anchove Delight", sauce: 'white'}
+    params = {name: "White Anchovy Delight", sauce: 'white'}
     @pizza = Pizza.find(params[:id])
     @pizza.update_attributes(params)
   end
