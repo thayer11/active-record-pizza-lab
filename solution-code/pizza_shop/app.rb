@@ -1,40 +1,32 @@
 class PizzaShop < Sinatra::Base
-
+  require 'json'
   # INDEX - like index.html, a list of pizzas
   # GET "/pizzas" - Gets all the pizzas we have
   get "/pizzas" do
-    @pizzas = Pizza.all
+    @pizzas = Pizza.all.to_json
   end
 
   # CREATE - where the new form POSTs to, it does the actual creating
   # POST "/pizzas" - Create a new pizza, add it to our list
   post "/pizzas" do
     #these will eventually be real params passed from the client
-    params = {name: "Red Anchovy Delight", sauce: 'red', cheese:true, mushrooms:true, extra_toppings: "anchovies"}
-    @pizza = Pizza.new(params)
+    new_pizza = JSON.parse request.body.read
+    @pizza = Pizza.new(new_pizza)
     @pizza.save
   end
 
   # SHOW - show details about just one pizza
   # GET "/pizzas/3" - Just get one specific pizza (that already exists)
   get "/pizzas/:id" do
-    @pizza = Pizza.find(params[:id])
+    @pizza = Pizza.find(params[:id]).to_json
   end
 
   # UPDATE - like CREATE, this does the actual updating
   # PUT "/pizzas/3" - Updates a specific pizza
   put "/pizzas/:id" do
-    params = {name: "White Anchovy Delight", sauce: 'white'}
+    attributes_to_update = JSON.parse request.body.read
     @pizza = Pizza.find(params[:id])
-    @pizza.update_attributes(params)
-  end
-
-  # UPDATE - believe it not, PUT & PATCH are often the same code, so many developers skip PATCH and just have PUT
-  # PATCH "/pizzas/3" - Partially updates a specific pizza
-  patch "/pizzas/:id" do
-    params = {name: "White Anchovy Delight", sauce: 'white'}
-    @pizza = Pizza.find(params[:id])
-    @pizza.update_attributes(params)
+    @pizza.update_attributes(attributes_to_update)
   end
 
   # DESTROY - totally nukes a pizza from the database
