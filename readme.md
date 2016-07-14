@@ -1,17 +1,25 @@
 # ActiveRecord Methods and Finders
 
+<!-- 1:00 10 mins -->
+
+<!--Hook:
+
+-->
+
 ### Objectives
-- Query a model using AR methods
-- Instantiate and create a new instance of a model
-- Edit a model's attributes
-- Destroy a model
+*After this lesson, students will be able to:*
+- **Query** a model using AR methods
+- **Instantiate** and **create** a new instance of a model
+- **Edit** a model's attributes
+- **Destroy** a model
 
 ### Preparation
-- Write a model that inherits from ActiveRecord
-- Instantiate a new instance of a class
-- Describe the structure of SQL tables, rows and columns
+*Before this lesson, students should already be able to:*
+- **Write** a model that inherits from ActiveRecord
+- **Instantiate** a new instance of a class
+- **Describe** the structure of SQL tables, rows and columns
 
-## Intro (15 mins)
+## Intro
 
 So now that you've looked at what SQL can do, and you've created Ruby classes from scratch, and even models that combine the two using ActiveRecord – it's time to see all the convenience and power that this library gives you. Today we're CRUDing.
 
@@ -23,17 +31,23 @@ Our example app today is for a pizza shop – Luigi's Pizza Bazaar. We'll be mak
 
 Don't forget to `bundle install`, `rake db:create`, and `rake db:migrate`
 
-## Investigate Starter Code (5 mins)
+<!-- 1:10 5 mins -->
 
-> 5 minute investigatory break. Play some pizza music.
+## Investigate Starter Code
+
+<!-- Play some pizza music. -->
+
+> 5 minute investigatory break.
 
 > Note: Today we're using `tux`, which gives us an interactive shell just like irb and pry, but customized to include our Sinatra application. Certainly not the only kid on the block, but it'll prove useful to mess around with our code in an irb-like setting.
 
-## Create - Codealong (10 mins)
+<!-- 1:15 10 mins -->
+
+## Create - Codealong
 
 One of the top four coolest parts of CRUD, create is when we use our model like a blueprint to make instances of the model. This is where we start filling up our database with rows of new records. Exciting stuff, so let's do this.
 
-Let's jump ```cd``` into our pizza app and jump into our tux shell.  Now, we've made new instances before. Who remembers?
+Let's jump (```cd```) into our pizza app and jump into our tux shell.  Now, we've made new instances before. Who remembers?
 
 ```ruby
 p1 = Pizza.new
@@ -48,14 +62,16 @@ p1 = Pizza.create({name: "Art Lover", sauce: "red sauce", cheese: true, mushroom
 
 DID YOU SEE THAT? ActiveRecord just took our ruby method (`.create`) and converted it to SQL for us! It saved it to our table as a new row, with all those attributes – all we had to do was pass it a hash.
 
-> Just so you know, ActiveRecord also gives us setter methods for each of our attributes, so we could just as easily say `p1.cheese = false`. Then we'd just have to save it wit `p1.save`.
+> Just so you know, ActiveRecord also gives us setter methods for each of our attributes, so we could just as easily say `p1.cheese = false`. Then we'd just have to save it with `p1.save`.
 
-## Create - Independent Practice (5 minutes)
+<!--1:25 5 mins -->
+
+## Create - Independent Practice
 
 Take five minutes to create at least three more pizzas. Make them with different options – try passing in just some of our attributes, trying using setter methods and `.save`. Get a handful of records in your database, we'll use them in the next section.
 
-
-## Read - Codealong (15 minutes)
+<!--1:30 15 minutes -->
+## Read - Codealong
 
 Sweet, now that we have some pizzas in our database, how do we find them again?
 
@@ -97,7 +113,7 @@ Pizza.where(cheese: false)
 Or, "Find me any pizzas where there's cheese **and** the sauce is called 'marinara'":
 
 ```ruby
-Pizza.where(cheese:false, sauce: 'marinara')
+Pizza.where(cheese:true, sauce: 'marinara')
 ```
 
 Both of those get you back an array, because a `where` query is asking for _any_ records it finds. You could combine this with `.first`, `.last`, a `.each` loop, or whatever you need.
@@ -131,11 +147,15 @@ Pizza.where(cheese: true).count # => 3
 
 So be mindful of when you're using `where` and when you're using `find`. Both are super useful, you just have to know the difference.
 
-## Read - Independent Practice (5 minutes)
+<!--1:45 5 minutes -->
+
+## Read - Independent Practice
 
 Take five minutes again just to practice finding and querying the pizzas you've created. Try different queries, querying multiple fields, finding based on different attributes and ids. Just see what happens for a couple minutes.
 
-## Update - Codealong (10 minutes)
+<!--1:50 5 minutes -->
+
+## Update - Codealong
 
 Now, the wonderful act of updating a record we know exists. Let's start by grabbing one and throwing it in a variable.
 
@@ -159,11 +179,15 @@ p.update_attributes(name: "The Anchovy Explosion", extra_toppings: "Anchovies, a
 
 Both will do the trick, and there's no significant difference between them.
 
-## Update - Independent Practice (5 minutes)
+<!-- 1:55 5 mins -->
+
+## Update - Independent Practice
 
 Now, take five minutes to practice updating on your own. Use both methods, see which you prefer. Try changing multiple attributes and one attribute.
 
-## Destroy - Codealong (10 minutes)
+<!--2:00 5 minutes -->
+
+## Destroy - Codealong
 
 Finally, the most devastating operation, destroying. Hopefully this one's not too surprising, because there's not much else you can do besides get rid of something:
 
@@ -182,7 +206,17 @@ Similar to the concept of JavaScript's callbacks, ActiveRecord lets us run metho
 
 If you're having trouble grasping the difference, just remember: use '.destroy'.
 
-## Conclusion (5 mins)
+<!--2:05 5 minutes -->
+
+## Destroy - Independent Practice
+
+Now, take a couple minutes to practice destroying on your own. Get rid of a couple of those pizzas the customers just aren't buying.
+
+Once this is done, try one more "Create" action, one more "Read" action, and one more "Update" on your DB to leave a pristine pizza menu.
+
+<!--2:10 5 minutes -->
+
+## Conclusion
 - What are two ways to create a new instance of a model? Can you imagine when one might be more convenient than the other?
 - What are the two ways you can update a model? Can you imagine when one might be more convenient than the other?
 - What's the difference between what you get back when querying with `where` and `find`?
@@ -198,12 +232,12 @@ All software code is licensed under GNU GPLv3. For commercial use or alternative
 
 ## Challenge
 
-Your task is to write a RESTful routes & controllers for our Pizza Shop and fill in each with _actual code_. Earlier this week we had a skeleton, and now it's time to fill it out.
+Your task is to write a RESTful routes & controllers for our Pizza Shop and fill in each with _actual code_. Earlier this week we built a route-controller skeleton with Sinatra, and now it's time to fill it out.
 
 There are two important details to keep in mind. Tomorrow morning, we'll be demonstrating how to use HTML forms to send data from user input to our controller actions, which will be the final piece of the puzzle for creating a full blown web application.
 
-* You don't have to create the controller actions for `new` and `edit`. Skip those until tomorrow (unless you want to jump ahead on your own).
-* Hardcode your params for now. You'll need to specifically in your `create` and `update` actions. We'll get those to be real data tomorrow.
+* You don't have to create the controller actions for `new` and `edit`. Skip those for now (unless you want to jump ahead on your own).
+* Hardcode your params for now. Specifically, you'll need to do this in your `create` and `update` actions. We'll get those to be real data (i.e. added by your user) later.
 
 ```ruby
 #create
@@ -213,16 +247,16 @@ post "/pizzas" do
 ```
 
 * Definitely use `tux` to test out if your code works *before* placing it inside your controller!!
-* Feel free to test out your routes with the [`curl`](http://conqueringthecommandline.com/book/curl#cid25) command (use `localhost:9292` as the url you'll hit).
+* Feel free to test out your routes with the [`curl`](http://conqueringthecommandline.com/book/curl#cid25) command (use `localhost:9292` as the url you'll hit) or Postman.
     * Tip: [how to send a POST request with curl, using parameters!](http://conqueringthecommandline.com/book/curl#uid105)
 
-> In the last 10 minutes, we'll walk through a complete solution example so you can gauge how you did!
+> In the last 10 minutes, we'll walk through a solution example so you can gauge how you did!
 
 ## Exercise
 
 ####Requirements
 
-- Write a RESTful controller for our pizza resource with `index`, `show`, `create`, `update`, and `delete` routes. You should be using (but not limited to) the following ActiveRecord methods:
+- Write a RESTful controller for our pizza resource with `index`, `show`, `create`, `update`, and `delete` routes. You should be using (but are not limited to) the following ActiveRecord methods:
 
   - `.find`
   - `.all`
@@ -236,11 +270,11 @@ post "/pizzas" do
 
 #### Starter Code
 
-The same code as our lesson is included in the `starter-code` folder. The Sinatra setup is ready to go, you just need to fill in your controller.
+The same code as our lesson is included in the `starter-code` folder. The Sinatra setup is ready to go, you just need to fill in your routes and controller logic.
 
 #### Deliverable
 
-Shoot to create a complete RESTful controller with appropriate ActiveRecord methods inside and compare your work with the solution code when complete.
+Shoot to create a complete RESTful controller with appropriate ActiveRecord methods inside.
 
 You'll get a lot more practice with this so don't sweat it if you're struggling, but if you are:
 
